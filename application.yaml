@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testpro
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Shenali-SJ/app-qe6zzRXiLCxUjFfQu4N4GU-helm.git
+    targetRevision: main
+    path: ./
+    helm:
+      valueFiles:
+      - values.yaml
+  destination:
+    server: default
+    namespace: argoapp
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
